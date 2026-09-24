@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPX Viewer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header id="header">
+    <h1>GPX Viewer</h1>
+    <div class="controls">
+      <label class="btn" for="file-input">Open GPX</label>
+      <input id="file-input" type="file" accept=".gpx" />
+      <button id="sample-btn" class="btn">Load Sample</button>
+      <label class="toggle">
+        <input id="sailing-toggle" type="checkbox" />
+        Sailing mode
+      </label>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="map"></div>
+    <aside id="panel">
+      <p id="empty-state" class="empty-state">Open a .gpx file or load the sample track to get started.</p>
+
+      <div id="content" hidden>
+        <section class="panel-section">
+          <h3 id="track-name"></h3>
+          <div class="stat-grid">
+            <div class="stat-box"><div class="label">Distance</div><div class="value" id="stat-distance">&ndash;</div></div>
+            <div class="stat-box"><div class="label">Duration</div><div class="value" id="stat-duration">&ndash;</div></div>
+            <div class="stat-box"><div class="label">Elevation gain</div><div class="value" id="stat-elevation">&ndash;</div></div>
+            <div class="stat-box"><div class="label">Avg speed</div><div class="value" id="stat-avg-speed">&ndash;</div></div>
+            <div class="stat-box"><div class="label">Max speed</div><div class="value" id="stat-max-speed">&ndash;</div></div>
+            <div class="stat-box"><div class="label">Moving time</div><div class="value" id="stat-moving-time">&ndash;</div></div>
+          </div>
+        </section>
+
+        <section id="sailing-section" class="panel-section" hidden>
+          <h3>Sailing</h3>
+          <label class="wind-control">
+            Wind direction: <span id="wind-dir-value">0&deg;</span>
+            <input id="wind-dir" type="range" min="0" max="359" value="0" />
+          </label>
+          <div class="stat-grid">
+            <div class="stat-box"><div class="label">Avg VMG upwind</div><div class="value" id="stat-vmg-up">&ndash;</div></div>
+            <div class="stat-box"><div class="label">Avg VMG downwind</div><div class="value" id="stat-vmg-down">&ndash;</div></div>
+          </div>
+          <p class="hint">Track is colored by speed. Set wind direction to compute VMG for upwind/downwind legs.</p>
+        </section>
+
+        <section class="panel-section">
+          <h3>Speed</h3>
+          <canvas id="speed-chart" width="320" height="100"></canvas>
+        </section>
+      </div>
+    </aside>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

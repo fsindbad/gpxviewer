@@ -1,0 +1,97 @@
+:root {
+  --bg: #1a1a2e;
+  --bg2: #16213e;
+  --accent: #0f3460;
+  --highlight: #e94560;
+  --text: #eee;
+  --text-dim: #8899aa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--accent);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#header h1 { font-size: 1.1em; font-weight: 600; }
+
+.controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.btn {
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn:hover { background: var(--highlight); }
+
+input[type="file"] { display: none; }
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85em;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+#main { display: flex; flex: 1; min-height: 0; }
+#map { flex: 1; min-width: 0; background: #0a0a1a; }
+
+#panel {
+  width: 320px;
+  background: var(--bg2);
+  border-left: 1px solid var(--accent);
+  overflow-y: auto;
+  flex-shrink: 0;
+  padding: 16px;
+}
+
+.empty-state { color: var(--text-dim); font-size: 0.9em; line-height: 1.5; }
+
+.panel-section { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--accent); }
+.panel-section:last-child { border-bottom: none; }
+
+.panel-section h3 {
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.stat-box { background: var(--accent); border-radius: 8px; padding: 10px; }
+.stat-box .label { font-size: 0.7em; color: var(--text-dim); text-transform: uppercase; }
+.stat-box .value { font-size: 1.2em; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.wind-control { display: block; font-size: 0.85em; color: var(--text-dim); margin-bottom: 10px; }
+.wind-control input[type="range"] { width: 100%; margin-top: 4px; }
+
+.hint { font-size: 0.75em; color: var(--text-dim); margin-top: 8px; line-height: 1.4; }
+
+#speed-chart { width: 100%; height: 100px; }
