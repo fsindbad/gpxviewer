@@ -37,7 +37,12 @@ async function handleApi(request: Request, env: Env, url: URL): Promise<Response
     }
 
     if (request.method === "PUT") {
-      const passcode = request.headers.get("x-upload-passcode") || "";
+      let passcode = "";
+      try {
+        passcode = decodeURIComponent(request.headers.get("x-upload-passcode") || "");
+      } catch {
+        // Malformed percent-encoding — treat as wrong passcode rather than a server error.
+      }
       if (!env.UPLOAD_PASSCODE || passcode !== env.UPLOAD_PASSCODE) {
         return Response.json({ error: "Invalid passcode" }, { status: 401 });
       }

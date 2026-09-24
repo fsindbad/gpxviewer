@@ -16,7 +16,7 @@ export async function fetchTrack(key) {
 function getPasscode() {
   let code = localStorage.getItem("gpxviewer-upload-passcode");
   if (!code) {
-    code = window.prompt("Upload passcode:") || "";
+    code = (window.prompt("Upload passcode:") || "").trim();
     if (code) localStorage.setItem("gpxviewer-upload-passcode", code);
   }
   return code;
@@ -25,7 +25,9 @@ function getPasscode() {
 export async function uploadTrack(file) {
   const res = await fetch(`/api/tracks/${encodeURIComponent(file.name)}`, {
     method: "PUT",
-    headers: { "x-upload-passcode": getPasscode() },
+    // Header values must be ISO-8859-1; percent-encode in case the passcode
+    // picked up stray characters from a paste (curly quotes, emoji, etc).
+    headers: { "x-upload-passcode": encodeURIComponent(getPasscode()) },
     body: file,
   });
   if (res.status === 401) {
